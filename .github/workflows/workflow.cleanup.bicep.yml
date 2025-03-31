@@ -24,6 +24,6 @@ jobs:
     with:
       pullRequestnumber: ${{ github.event.inputs.pullRequestNumber }}
       githubEnvironment: symphony
-      tenantId: ${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}
-      subscriptionId: ${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}
+      tenantId: ${{ github.event.inputs.tenantId }}
+      subscriptionId: ${{ github.event.inputs.subscriptionId }}
     secrets: inherit
