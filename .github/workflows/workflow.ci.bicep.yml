@@ -42,12 +42,12 @@ jobs:
     outputs:
       tenantId: ${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}
       subscriptionId: ${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}
-    # steps:
-    #   - name: Set environment variables with fallback logic
-    #     id: set-values
-    #     run: |
-    #       echo "tenantId=${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
-    #       echo "subscriptionId=${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
+    steps:
+      - name: Set environment variables with fallback logic
+        id: set-values
+        run: |
+          echo "tenantId=${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
+          echo "subscriptionId=${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
 
   Validate:
     needs: generate_outputs
