@@ -42,6 +42,11 @@ jobs:
         with:
           ref: ${{ inputs.branchName }}
 
+      - name: Echo deployment target
+        run: |
+          echo "tenantId=${{ inputs.tenantId }}"
+          echo "subscriptionId=${{ inputs.subscriptionId }}"
+
       - name: Setup Toolset
         run: |
           ./setup-azcli.sh
