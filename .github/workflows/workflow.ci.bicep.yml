@@ -43,10 +43,10 @@ jobs:
       - name: Set environment variables with fallback logic
         id: set-values
         run: |
-          echo "tenantId=${{ github.event.inputs.tenantId != '' && github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}"
-          echo "subscriptionId=${{ github.event.inputs.subscriptionId != '' && github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}"
-          echo "tenantId=${{ github.event.inputs.tenantId != '' && github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
-          echo "subscriptionId=${{ github.event.inputs.subscriptionId != '' && github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
+          echo "tenantId=${{ github.event.inputs.tenantId != null && github.event.inputs.tenantId != '' && github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}"
+          echo "subscriptionId=${{ github.event.inputs.subscriptionId != null && github.event.inputs.subscriptionId != '' && github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}"
+          echo "tenantId=${{ github.event.inputs.tenantId != null && github.event.inputs.tenantId != '' && github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
+          echo "subscriptionId=${{ github.event.inputs.subscriptionId != null && github.event.inputs.subscriptionId != '' && github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
     outputs:
       tenantId: ${{ env.tenantId }}
       subscriptionId: ${{ env.subscriptionId }}
