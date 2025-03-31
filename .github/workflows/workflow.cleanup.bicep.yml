@@ -8,13 +8,11 @@ on: # yamllint disable-line rule:truthy
         description: "Pull Request Number"
         required: true
       tenantId:
-        description: "The target tenant id in which to deploy resources"
-        required: true
-        default: ${{ secrets.AZURE_TENANT_ID }}
+        description: "Target tenant id (if overriding default)"
+        required: false
       subscriptionId:
-        description: "The target subscription id in which to deploy resources"
-        required: true
-        default: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        description: "Target subscription (if overriding default)"
+        required: false
 
 permissions:
   id-token: write
@@ -26,6 +24,6 @@ jobs:
     with:
       pullRequestnumber: ${{ github.event.inputs.pullRequestNumber }}
       githubEnvironment: symphony
-      tenantId: ${{ github.event.inputs.tenantId }}
-      subscriptionId: ${{ github.event.inputs.subscriptionId }}
+      tenantId: ${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}
+      subscriptionId: ${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}
     secrets: inherit
