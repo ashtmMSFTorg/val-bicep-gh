@@ -39,15 +39,17 @@ permissions:
 jobs:
   generate_outputs:
     runs-on: ubuntu-latest
-    outputs:
-      tenantId: ${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}
-      subscriptionId: ${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}
     steps:
       - name: Set environment variables with fallback logic
         id: set-values
         run: |
+          echo "tenantId=${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}"
+          echo "subscriptionId=${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}"
           echo "tenantId=${{ github.event.inputs.tenantId || secrets.AZURE_TENANT_ID }}" >> $GITHUB_ENV
           echo "subscriptionId=${{ github.event.inputs.subscriptionId || secrets.AZURE_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
+    outputs:
+      tenantId: ${{ env.tenantId }}
+      subscriptionId: ${{ env.subscriptionId }}
 
   Validate:
     needs: generate_outputs
